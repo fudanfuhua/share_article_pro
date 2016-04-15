@@ -1,0 +1,60 @@
+<html DOCTYPE=html>
+<head>
+	<link rel="stylesheet" href="/static/css/style.css">
+	<script type="text/javascript"  src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+</head>
+<body>
+<div class="nav">
+   {% block page-nav  %}
+   <span style="margin-left: 30px;">
+	{% if user.is_authenticated  %}
+		{% if home_page  %}
+			<a href="/pub" class="write nav-info">编写文章</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="/admin" class="nav-info">后台管理</a>
+		{% else %}
+			<a href="/" class="bak_home nav-info">文章</a>
+		{% endif %}
+   </span>
+		<a class="exit nav-info" style="float: right;margin-right: 50px;" href="/logout_views/" >退出</a>	
+		<span style="float: right; margin-right: 10px;"  class="user">{{ user.username }}</span>
+	{% else %}
+		<a href="/login">请登录</a>
+	{% endif %}
+   	<hr />
+   {% endblock %}
+</div>
+<div class="content" style="margin: 40px 0 0 25px;overflow: hidden;">
+   {% block page-content %}
+   <div class="list-card">
+	{% for bbs in bbs_list %} 
+	   <span class="study-card">
+		<div class="info-line">
+			标题：<a style="color:#FFEB3B;"  href="/detail/{{bbs.id}}/">{{ bbs.title }}</a>
+		</div>
+		<div class="info-line">
+			分享人：{{ bbs.author }}
+		</div>
+		<div class="info-line">
+			来源：{{ bbs.summary}}
+		</div>
+		<span class="circle-info"><a href="/detail/{{bbs.id}}/">{{bbs.id}}</a></span>
+		
+		{% ifequal user.username 'admin' %}
+          		 <span style="cursor:pointer"  class="remove-box" data-bbsid="{{bbs.id}}">X</span>
+          	{% endifequal %}
+	   </span>
+        {% endfor %} 
+   </div>
+   {% endblock %}
+</div>
+
+<!-- libs  -->
+<script type="text/javascript" src="/static/js/jquery/jquery.js"></script>
+
+<!-- own  -->
+<script type="text/javascript" src="/static/js/page.js"></script>
+
+{% block page-js %} {% endblock %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends  'index.html' %}
+
+{% block page-nav  %}{% endblock  %}
+{% block page-content %}
+<div class="login">
+
+ <h2 style="position: absolute;right: 22%;top:10%">文章,随笔</h2>
+  <div class="left-part clearfix">
+  	{% include "segment/css_img.html" %}
+  	<!-- 月亮 -->
+        <figure class="moon"></figure>
+	<!-- 云 -->
+        <figure class="cloudy cloudy-pos1"></figure>
+        <figure class="cloudy cloudy-pos2"></figure>
+        <figure class="cloudy cloudy-pos3"></figure>
+  </div>
+  <div class="right-part">
+    <form action='/acc_login' method='GET'>	
+	<div class="circle-login">
+	   <div style="margin-top: 90px">
+		<div>用户：<input type='text' name='username' /></div>
+		<div>密码：<input type='password' name='password' /></div>
+		<div>
+			<input type='submit' style="padding: 10px;" value='登录' />
+		</div>
+			<span style='color:red;' >{{ login_err }}</span>
+	    </div>
+	</div>
+   </from>
+  </div>
+</div>
+{% endblock %}

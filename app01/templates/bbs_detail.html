@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load comments %}
+
+{% block page-content %}
+   <div class="left-box">
+	<h1 style="color: yellow">文章</h1>
+	<div style="margin: 10px 0;color: yellow">标题：{{ bbs_obj.title }}</div>
+	<div><span style="color: yellow">正文：</span>{{ bbs_obj.content | safe }}</div>
+	<!--|safe de function is to save yuan geshi-->
+   </div> 
+   <div class="write_publish">	
+	{% if user.is_authenticated %}
+	   <form style="position: relative" action="/sub_comment/" method="POST">
+		<textarea style="width: 82%; height: 111px;" name="comment_content"></textarea>
+		<input type="hidden" name="bbs_id" value="{{bbs_obj.id}}" />
+		 <button type="submit" style="bottom: -40px; left: 0;position: absolute;" id="id_submit">添加评论</button>
+	   </form> 
+	{% else %}
+           <p>Please <a href='/login'>Login</a> to submit a comment</p>
+	{% endif %}
+    </div>
+
+    <div class="comment-list">
+	{% get_comment_count for bbs_obj as comment_count %}
+	<h2>评论数：{{ comment_count }}</h2>
+			
+    	{% render_comment_list for bbs_obj  %}
+    </div>
+{% endblock %}

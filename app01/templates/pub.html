@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block page-content %}
+<!-- Place this in the body of the page content -->
+	<form method="post" action="/bbs_sub/">
+	    <div style="margin: 10px 20px 0">
+		<div class="pub-info">标题:</div>
+		<div class="pub-cont"><input type="text" width="200" name="title" /></div>
+	    </div>
+    	    <div style="margin: 10px 20px 0">
+		<div class="pub-info">来源:</div>
+		<div class="pub-cont"><input type="text" placeHolder="转载"  width="200" name="summary" /></div>
+	    </div>
+	    <div style="margin: 16px 50px 0">
+	    	<div class="pub-info" style="margin-bottom: 10px;margin-left: -30px;">内容:</div>
+		<textarea name="content" id="mytextarea" ></textarea>
+	    </div>
+	    <input style="margin: 20px 20px 0"  type='submit'  value='save'	/>
+	</form>
+{% endblock %}
+
+{% block page-js %}
+	<script type="text/javascript">
+		tinymce.init({
+    			selector: "#mytextarea",
+			width: 700,
+			height: 200
+		});   
+	</script>
+{% endblock %}
